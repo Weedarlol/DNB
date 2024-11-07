@@ -1,9 +1,25 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
 
 using namespace std;
+
+string readKeyFromFile() {
+    ifstream file("personal_key.csv");  // Open the file
+    string key;
+
+    if (file.is_open()) {
+        // Read the key from the file (assuming it's just a single line of text)
+        getline(file, key);  
+        file.close();  // Close the file after reading
+    } else {
+        cerr << "Error: Could not open file personal_key.csv" << endl;
+    }
+
+    return key;
+}
 
 // Define a callback function to handle the response data from CURL
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
@@ -18,7 +34,11 @@ int main() {
     string readBuffer;
 
     curl = curl_easy_init();
-    if(curl) {
+
+    string apiKey = readKeyFromFile();
+
+    cout << apiKey << endl;
+    /* if(curl) {
         // Set the URL of the D&B API endpoint
         string url = "https://developer-api-testmode.dnb.no/test-customers/v0";  // Adjust endpoint based on your needs
 
@@ -59,6 +79,6 @@ int main() {
         // Clean up
         curl_easy_cleanup(curl);
         curl_slist_free_all(headers);
-    }
+    } */
     return 0;
 }
