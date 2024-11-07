@@ -23,7 +23,7 @@ int main() {
         string url = "https://developer-api-testmode.dnb.no/test-customers/v0";  // Adjust endpoint based on your needs
 
         // Replace with your actual API key
-        string apiKey = "2e69a2c2455d4244ab44fbfdd2f489c6";
+        string apiKey = "";
 
         
         // Set up headers including the API key for authorization
